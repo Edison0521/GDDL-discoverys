@@ -48,7 +48,7 @@ def appro(l: list):
     for i in range(len(l)):
         for j in range(len(l)):
             if i != j and i < j:
-                if l[i] == l[j]:  # 严格相等时候，明天改成相似度
+                if l[i] == l[j]:  
                     temp = []
                     temp.append(i)
                     temp.append(j)
