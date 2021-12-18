@@ -6,8 +6,9 @@ import gddldiscovery as gd
 GL = gddl()
 G = Graph()
 omiga = []
-title = gd.getAttrbutes('dataset/test/1.csv')
-data = pd.read_csv('dataset/test/1.csv')
+filename = 'dataset/test/1.csv'
+title = gd.getAttrbutes(filename)
+data = pd.read_csv(filename)
 df = pd.DataFrame(data)
 for i in range(data.shape[0]):
     row = data.loc[i]
@@ -20,14 +21,14 @@ for i in range(data.shape[0]):
 
 temp1 = []
 for i in range(len(title)):
-    temp1.append(gd.attributes(title[i]))
+    temp1.append(gd.attributes(filename,title[i]))
 b = temp1
-#sigma = gd.addthresord(title)
+sigma = gd.addthresord(title)
 level1 = []
-sigma = [[0.0], [0.0], [0.0, 0.2], [10.0], [], [0.0], [0.0]]
-#print("请输入最小支持度：")
-#thresord = int(input())
-thresord = 1
+#sigma = [[0.0], [0.0], [0.0, 0.2], [10.0], [], [0.0], [0.0]]
+print("Please enter the minimum support：")
+thresord = int(input())
+#thresord = 1
 
 for i in range(len(sigma)):
     for j in range(len(sigma[i])):
@@ -37,15 +38,15 @@ for i in range(len(sigma)):
 G.add_pair()
 RHS = gd.createRHS(G.pairs)  #Fun1 1
 '''
-对第一层进行去冗余
+detectitems of first level
 '''
 
 def detect(rhs:list,cond:list):
     '''
 
-    :param rhs:右属性集
-    :param cond: 带传入的列表
-    :return: 如果整个itemset都在RHS当中则返回为一个gddl
+    :param rhs:RHS
+    :param cond: The itemsets wait for detect
+    :return: if whole the items are in the RHS then return
     '''
     c = cond.copy()
     for i in range(len(cond)):
@@ -71,7 +72,7 @@ def ret(l1:list,l2:list):
 
     :param l1:
     :param l2:
-    :return: 两个集合的并集
+    :return: Union of two sets
     '''
     k = len(l1)
     k2 = len(l2)
@@ -137,7 +138,7 @@ def findDEEP(items:LCP):
 
 
 f = findDEEP(candlevel)
-print("剩余的GDDL是：")
+print("The last items：")
 print(f)
-print("最终发现的gddl是：")
+print("The output of discovery：")
 print(omiga)

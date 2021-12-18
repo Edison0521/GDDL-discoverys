@@ -6,8 +6,8 @@ import numpy
 def is_nan(nan):
     return nan != nan
 
-def attributes(n):
-    datas = pd.read_csv('dataset/test/1.csv',usecols=[n])
+def attributes(filename,n):
+    datas = pd.read_csv(filename,usecols=[n])
     return datas[n].tolist()
 
 def splitstr(s: str):
@@ -41,7 +41,7 @@ def similars(sigma : float,l1,l2):
         if len(tempA) <= sigma:
             return True
 
-
+'''
 def appro(l: list):
     L = []
     P = []
@@ -55,7 +55,7 @@ def appro(l: list):
                     L.append(temp)
     return L
 
-
+'''
 
 
 def createRHS(pairlist: list):
@@ -110,10 +110,10 @@ def addthresord(title: list):
     list = []
     for i in range(len(title)):
         temp = []
-        print("请输入" + title[i] + "允许的范围个数")
+        print("Please enter how many segments you want to divide the " + title[i] + " into:")
         m = int(input())
         for j in range(0, m):
-            print("请输入允许的范围：")
+            print("Please enter the allowed range：")
             sigma = float(input())
             temp.append(sigma)
         list.append(temp)
