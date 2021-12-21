@@ -1,12 +1,4 @@
-"""------------------------------------------------------------------------------------------
-TANE Algorithm for discovery of exact functional dependencies
-Author: Nabiha Asghar, nasghar@uwaterloo.ca
-February 2015
-Use for research purposes only.
-Please do not re-distribute without written permission from the author
-Any commerical uses strictly forbidden.
-Code is provided without any guarantees.
-----------------------------------------------------------------------------------------------"""
+
 from pandas import *
 from collections import defaultdict
 import numpy as NP
