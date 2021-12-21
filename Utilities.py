@@ -51,13 +51,13 @@ class Item(object):
 
 class Graph(object):
     def __init__(self):
-        self.node_list = []  # 初始化点集
-        self.node_number = 0  # 顶点个数初始化
-        #self.node_types = [] # 初始化类型
-        self.node_attributes = [] # 初始化属性
-        self.edges = [] # 初始化边
+        self.node_list = []  # Initializing node sets
+        self.node_number = 0  # Initializing nodenumber sets
+        #self.node_types = [] # Initializing node_types
+        self.node_attributes = [] # Initializing attributes
+        self.edges = [] # Initializing edges
         self.edge_number = 0
-        self.pairs = [] #初始化配对
+        self.pairs = [] # Initializing pairs
         self.titles = []
 
 
@@ -65,7 +65,7 @@ class Graph(object):
     @property
     def nodes(self) -> list:
         '''
-        返回图中所有节点
+        return all nodes
         '''
         return self.node_list
 
@@ -73,7 +73,7 @@ class Graph(object):
     @property
     def attribute(self) -> list:
         '''
-        返回图中所有的type
+        return all types
         '''
         return self.node_attributes
     @property
@@ -94,17 +94,17 @@ class Graph(object):
         return node_id
     def find_node(self, id:int) -> Node:
         '''
-        根据id查询节点
+        check node by id
         '''
         return self.nodes[id - 1]
     def find_node_inlist(self, id:int) -> Node:
         '''
-        根据id查询节点
+        
         '''
         return self.nodes[id]
     def find_edge(self, edge_id:int) -> list:
         '''
-        根据起始点id查询边
+        
 
         edges = []
         if source_id != None or target_id != None:
@@ -117,16 +117,6 @@ class Graph(object):
 
     def add_edge(self, node_id:int,edge_id:int) -> int:
         '''
-        新增一条边
-
-        参数
-        ----
-        自定，但至少有relation
-
-        返回值
-        ------
-        id : int
-            新增边的id
 
         if from_node_id > len(self.node_list):
             return -1

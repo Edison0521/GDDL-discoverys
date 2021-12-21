@@ -16,7 +16,11 @@ If you want to run this project, execute demo.py directly
 
 ### Necessary libraries
 
+<<<<<<< HEAD
 python3.6 pandas 
+=======
+pandas
+>>>>>>> 7aac43f6f7fab3cf649fd6db3f4f6b79bcaa801e
 
 ### Problems
 
