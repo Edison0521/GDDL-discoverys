@@ -1,6 +1,6 @@
 # GDDl discovery
 
-## This project aims to reproduce GDDl-discovery
+## This project aims to recurrent GDDl-discovery
 
 ### File description
 
