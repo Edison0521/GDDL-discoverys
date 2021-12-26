@@ -6,7 +6,7 @@ import gddldiscovery as gd
 GL = gddl()
 G = Graph()
 omiga = []
-filename = 'dataset/test/1.csv'
+filename = 'dataset/test/testdataABCD.csv'
 title = gd.getAttrbutes(filename)
 data = pd.read_csv(filename)
 df = pd.DataFrame(data)
@@ -134,10 +134,12 @@ def findDEEP(items:LCP):
                         if r2 != []:
                             item = LCP(items[i].name+items[j].name,r2)
                             temp.append(item.name)
-    return temp
+    if len(items) != 1:
+        return temp
 
 
 f = findDEEP(candlevel)
+
 print("The last items：")
 print(f)
 print("The output of discovery：")
