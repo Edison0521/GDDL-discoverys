@@ -19,6 +19,7 @@ class Edge(object):
 
 class Pair(object):
     def __init__(self,node1_id:int,node2_id:int):
+
         self.node1_id = node1_id
         self.node2_id = node2_id
         #self.edge_id = edge_id
@@ -35,9 +36,13 @@ class LCP(object):
         self.name = level_name
         self.items = items
     def __repr__(self):
-        return "%s %s"%(self.name,self.items )
-
-
+        return "%s %s"%(self.name,self.items)
+class LCPs(object):
+    def __init__(self,level_name:str,items:list):
+        self.name = level_name
+        self.items = items
+    def __repr__(self):
+        return "%s %s"%(self.name,self.items)
 
 class Item(object):
     def __init__(self,itemname:str,sigma:float,item:list):

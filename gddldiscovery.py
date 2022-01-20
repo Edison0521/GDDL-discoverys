@@ -1,10 +1,11 @@
 from Utilities import Pair, Graph
 import pandas as pd
 import difflib
-import numpy
+import numpy as np
 
 def is_nan(nan):
     return nan != nan
+
 
 def attributes(filename,n):
     datas = pd.read_csv(filename,usecols=[n])
@@ -16,17 +17,16 @@ def splitstr(s: str):
         temp1.append(litter)
     return temp1
 
-
 def similars(sigma : float,l1,l2):
     t = l1
     #print(l1,l2)
-    if type(l1) and type(l2) == float :
+    if type(l1) and type(l2) == float:
         m = abs(l1 - l2)
         if m <= sigma:
             return True
     if type(t) and type(l2) == str:
-        temp0 = splitstr(l1)
-        temp1 = splitstr(l2)
+        temp0 = list(set(l1))
+        temp1 = list(set(l2))
         if len(temp0) > len(temp1):
             tempA = temp0
             tempB = temp1
@@ -41,23 +41,6 @@ def similars(sigma : float,l1,l2):
         if len(tempA) <= sigma:
             return True
 
-'''
-def appro(l: list):
-    L = []
-    P = []
-    for i in range(len(l)):
-        for j in range(len(l)):
-            if i != j and i < j:
-                if l[i] == l[j]:  # 严格相等时候，明天改成相似度
-                    temp = []
-                    temp.append(i)
-                    temp.append(j)
-                    L.append(temp)
-    return L
-
-'''
-
-
 def createRHS(pairlist: list):
     l = []
     for i in range(len(pairlist)):
@@ -71,41 +54,7 @@ def getAttrbutes(filename: str):
     for i in range(1, len(df.loc[0]) - 1):
         sx.append(df.loc[0][i])
     return sx
-'''
 
-def finddep(graph: Graph):
-    tempL = []
-    tempL4 = []
-
-    G = graph
-   
-    k = 0
-    for i in range(len(G.nodes)):
-        for j in range(len(G.node_attributes[0])):
-             print(G.nodes[i].attribute[j])
-    
-    ss = string_similar(G.nodes[0].attribute[0],G.nodes[1].attribute[0])
-    print(G.nodes[1].attribute[0],G.nodes[2].attribute[0])
-    print(ss)
-   
-    b = list(zip(*G.node_attributes))
-    for i in range(len(b)):
-        for j in range(len(b[i])):
-            for n in range(len(b[i])):
-                if n > j:
-                    if is_nan(b[i][j])== False:
-                        if is_nan(b[i][n]) == False:
-                            if similars(0.0, b[i][j], b[i][n]):
-                                tempL3 = []
-                                tempL3.append(j+1)
-                                tempL3.append(n+1)
-                                tempL4.append(tempL3)
-                                print(tempL4,i,j,n)
-
-
-
-    #print(tempL)
-'''
 def addthresord(title: list):
     list = []
     for i in range(len(title)):
@@ -120,15 +69,14 @@ def addthresord(title: list):
     print(list)
     return list
 
-
 def additems(k:int,sigma,l:list):
     temp = []
     #k = 1
     for i in range(len(l)):
         for j in range(len(l)):
             if i < j:
-                if is_nan(l[i]) ==False:
-                    if is_nan(l[j]) ==False:
+                if is_nan(l[i]) or is_nan(l[j])  ==False:
+                    #if is_nan(l[j]) ==False:
                         if similars(sigma, l[i], l[j]):
                             templ = []
                             templ.append(i+1)
@@ -138,3 +86,72 @@ def additems(k:int,sigma,l:list):
     if len(temp) < k:
         return []
     return temp
+def ret(l1:list,l2:list):
+    '''
+
+    :param l1:
+    :param l2:
+    :return: Union of two sets
+    '''
+    k = len(l1)
+    k2 = len(l2)
+    ftemp = []
+    if k >= k2:
+        rtemp = l1
+        r2temp = l2
+    else:
+        r2temp = l1
+        rtemp = l2
+    for i in range(len(r2temp)):
+        if r2temp[i] in rtemp:
+            ftemp.append(r2temp[i])
+    return ftemp
+def decar(l1:list,l2:list):
+    decar = []
+    '''
+    for i in range(len(l1)):
+        for j in range(len(l1)):
+            if j > i:
+                decar.append(Pair(l1[i],l1[j]))
+    for i in range(len(l2)):
+        for j in range(len(l2)):
+            if j > i:
+                decar.append(Pair(l2[i],l2[j]))
+    '''
+    for i in range(len(l1)):
+        for j in range(len(l2)):
+            decar.append(Pair(l1[i], l2[j]))
+    return decar
+def disdecar(l1:list):
+    decar = []
+    for i in range(len(l1)):
+        for j in range(len(l1)):
+            if j > i:
+                decar.append(Pair(l1[i],l1[j]))
+
+    return decar
+def flat(nums):
+    res = []
+    for i in nums:
+        if isinstance(i, list):
+            res.extend(flat(i))
+        else:
+            res.append(i)
+    return res
+def diff(item,l2:list):
+    temp = []
+    for i in range(len(l2)):
+        if l2[i] == []:
+            temp.append(item[i])
+    return temp
+def detect(rhs:list,cond:list):
+    '''
+
+    :param rhs:RHS
+    :param cond: The itemsets wait for detect
+    :return: if whole the items are in the RHS then return
+    '''
+    print(type(rhs[0]))
+
+
+    return cond

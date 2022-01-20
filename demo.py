@@ -1,12 +1,12 @@
 from Utilities import LCP , Graph , gddl
 import pandas as pd
 import gddldiscovery as gd
-
+import time
 
 GL = gddl()
 G = Graph()
 omiga = []
-filename = 'dataset/test/testdataABCD.csv'
+filename = 'dataset/restaurant/fz.arff.csv'
 title = gd.getAttrbutes(filename)
 data = pd.read_csv(filename)
 df = pd.DataFrame(data)
@@ -23,20 +23,25 @@ temp1 = []
 for i in range(len(title)):
     temp1.append(gd.attributes(filename,title[i]))
 b = temp1
-sigma = gd.addthresord(title)
+print(b)
+#sigma = gd.addthresord(title)
 level1 = []
-#sigma = [[0.0], [0.0], [0.0, 0.2], [10.0], [], [0.0], [0.0]]
-print("Please enter the minimum support：")
-thresord = int(input())
-#thresord = 1
+sigma = [[1.0, 2.0, 3.0], [1.0, 2.0, 3.0], [1.0, 2.0, 3.0], [1.0, 2.0, 3.0], [1.0, 2.0, 3.0]]
+#print("Please enter the minimum support：")
+#thresord = int(input())
+thresord = 200
 
 for i in range(len(sigma)):
     for j in range(len(sigma[i])):
         level1.append(gd.additems(thresord,sigma[i][j],b[i]))
+        print(2)
         GL.additems(title[i],sigma[i][j],gd.additems(thresord,sigma[i][j],b[i]))
-
+    print(1)
 G.add_pair()
 RHS = gd.createRHS(G.pairs)  #Fun1 1
+print(G.pairs)
+time_start=time.time()
+
 '''
 detectitems of first level
 '''
@@ -142,5 +147,9 @@ f = findDEEP(candlevel)
 
 print("The last items：")
 print(f)
+time_end=time.time()
+print('time cost',time_end-time_start,'s')
 print("The output of discovery：")
 print(omiga)
+time_end=time.time()
+print('time cost',time_end-time_start,'s')
