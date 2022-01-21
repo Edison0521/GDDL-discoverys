@@ -146,7 +146,7 @@ def findDEEP(items:LCP):
 f = findDEEP(candlevel)
 
 print("The last items：")
-print(f)
+
 time_end=time.time()
 print('time cost',time_end-time_start,'s')
 print("The output of discovery：")

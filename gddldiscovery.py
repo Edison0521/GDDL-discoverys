@@ -120,23 +120,47 @@ def decar(l1:list,l2:list):
     '''
     for i in range(len(l1)):
         for j in range(len(l2)):
-            decar.append(Pair(l1[i], l2[j]))
+            temp =[]
+            temp.append(l1[i])
+            temp.append(l2[j])
+            decar.append(temp)
+            #decar.append(Pair(l1[i], l2[j]))
     return decar
+def decar2(list1,list2):
+    l = []
+    for i in range(len(list1)):
+        for j in range(len(list2)):
+            if j > i:
+                temp = []
+                temp.append(list1[i])
+                temp.append(list2[j])
+                l.append(temp)
+    return l
 def disdecar(l1:list):
+    #print(l1)
     decar = []
     for i in range(len(l1)):
         for j in range(len(l1)):
             if j > i:
-                decar.append(Pair(l1[i],l1[j]))
+                temp = []
+                temp.append(l1[i])
+                temp.append(l1[j])
+                decar.append(temp)
 
     return decar
 def flat(nums):
     res = []
     for i in nums:
         if isinstance(i, list):
+            m = 0
             res.extend(flat(i))
         else:
             res.append(i)
+    return res
+def flat2(nums):
+    res = []
+    for i in range(len(nums)):
+        res.append(nums[i])
     return res
 def diff(item,l2:list):
     temp = []
@@ -150,8 +174,45 @@ def detect(rhs:list,cond:list):
     :param rhs:RHS
     :param cond: The itemsets wait for detect
     :return: if whole the items are in the RHS then return
+
+    c = cond.copy()
+    for i in range(len(cond)):
+        if cond[i] in rhs:
+            c.remove(cond[i])
+    if c == []:
+        return c
+    else:
+        return cond
     '''
-    print(type(rhs[0]))
+    c = cond.copy()
+    for i in range(len(cond)):
+        for j in range(len(rhs)):
+            #print(rhs[i], cond[j])
+            if cond[i] == rhs[j]:
+                #print(rhs[i],cond[j])
+                c.remove(rhs[j])
+    return c
+def combains(rhs:list,cond:list):
+    '''
 
+    :param rhs:RHS
+    :param cond: The itemsets wait for detect
+    :return: if whole the items are in the RHS then return
 
-    return cond
+    c = cond.copy()
+    for i in range(len(cond)):
+        if cond[i] in rhs:
+            c.remove(cond[i])
+    if c == []:
+        return c
+    else:
+        return cond
+    '''
+    c = []
+    for i in range(len(cond)):
+        for j in range(len(rhs)):
+            #print(rhs[i], cond[j])
+            if cond[i] == rhs[j]:
+                #print(rhs[i],cond[j])
+                c.append(cond[i])
+    return c
